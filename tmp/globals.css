@@ -1,0 +1,171 @@
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 72px;
+    --sidebar-width: 280px;
+    --primary-gradient: linear-gradient(to right, #0284c7, #0ea5e9);
+  }
+
+  body {
+    @apply text-slate-700 bg-slate-50;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-slate-900 tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-all 
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50
+    disabled:pointer-events-none shadow-sm duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus-visible:ring-primary-500 
+    hover:translate-y-[-2px] hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-100 text-slate-900 hover:bg-slate-200 focus-visible:ring-slate-500
+    hover:translate-y-[-2px] hover:shadow-sm;
+  }
+
+  .btn-outline {
+    @apply border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 
+    focus-visible:ring-slate-500 hover:translate-y-[-2px] hover:shadow-sm;
+  }
+
+  .btn-lg {
+    @apply h-12 px-8 py-3 text-base;
+  }
+
+  .btn-md {
+    @apply h-10 px-6 py-2;
+  }
+
+  .btn-sm {
+    @apply h-8 px-4 py-1 text-sm;
+  }
+
+  .card {
+    @apply rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300
+    hover:shadow-md;
+  }
+
+  .input {
+    @apply flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm
+    placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+    disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300;
+  }
+
+  .container-xl {
+    @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-lg {
+    @apply max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-md {
+    @apply max-w-screen-md mx-auto px-4 sm:px-6;
+  }
+
+  .container-sm {
+    @apply max-w-screen-sm mx-auto px-4;
+  }
+  
+  .shadow-soft {
+    @apply shadow-md;
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-400;
+  }
+
+  .hero-section {
+    @apply relative py-24 md:py-36 overflow-hidden;
+    background: linear-gradient(135deg, rgba(240,249,255,1) 0%, rgba(224,242,254,0.8) 100%);
+  }
+
+  .hero-title {
+    @apply mb-6 text-4xl md:text-5xl font-bold text-balance;
+  }
+
+  .hero-subtitle {
+    @apply block text-primary-600 mt-2;
+  }
+
+  .hero-description {
+    @apply text-xl md:text-2xl text-slate-700 mb-10 text-balance leading-relaxed;
+  }
+
+  .glass-card {
+    @apply rounded-xl bg-white/90 backdrop-blur-sm shadow-xl p-6 border border-white/20;
+  }
+
+  .feature-card {
+    @apply card p-8 flex flex-col items-center text-center rounded-xl shadow-md hover:shadow-lg transition-all
+    bg-white border border-slate-100 hover:border-primary-200 hover:transform hover:scale-105 duration-300;
+  }
+
+  .feature-icon {
+    @apply w-16 h-16 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6;
+  }
+
+  .testimonial-card {
+    @apply card p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 bg-white 
+    border border-slate-100 hover:border-primary-200;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+/* CSS Reset already handled by Tailwind's preflight */

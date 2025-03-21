@@ -68,7 +68,7 @@ export default function LoginForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300"
+            className="input"
             placeholder="you@example.com"
           />
         </div>
@@ -89,7 +89,7 @@ export default function LoginForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300"
+            className="input"
             placeholder="••••••••"
           />
         </div>
@@ -98,7 +98,7 @@ export default function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center justify-center rounded-md w-full h-10 px-6 py-2 text-sm font-medium bg-primary-600 text-white hover:bg-primary-700 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px] focus:outline-none"
+            className="btn btn-primary w-full"
           >
             {loading ? (
               <span className="flex items-center justify-center">
