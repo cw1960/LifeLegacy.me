@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "LifeLegacy.me",
+    "tagline": "Simplifica tu planificación de patrimonio digital",
+    "description": "Una plataforma segura para gestionar tu legado digital"
+  },
+  "auth": {
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer Contraseña",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "validEmail": "Introduce un correo electrónico válido",
+    "passwordRequired": "La contraseña es obligatoria",
+    "minPassword": "La contraseña debe tener al menos 8 caracteres",
+    "confirmPassword": "Confirmar Contraseña",
+    "passwordMatch": "Las contraseñas deben coincidir",
+    "loginSuccess": "Sesión iniciada correctamente",
+    "registerSuccess": "Registro completado correctamente",
+    "confirmEmail": "Por favor, verifica tu correo electrónico para confirmar tu cuenta",
+    "resetSuccess": "Correo de restablecimiento de contraseña enviado",
+    "errorTitle": "Error de Autenticación",
+    "tryAgain": "Por favor, inténtalo de nuevo o contacta a soporte"
+  },
+  "nav": {
+    "features": "Características",
+    "pricing": "Precios",
+    "about": "Acerca de",
+    "login": "Iniciar Sesión",
+    "getStarted": "Comenzar",
+    "dashboard": "Panel Principal",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido a tu panel principal",
+    "quickActions": "Acciones Rápidas",
+    "recentActivity": "Actividad Reciente"
+  },
+  "language": {
+    "en-US": "English (US)",
+    "es-MX": "Español (MX)",
+    "changeLanguage": "Cambiar Idioma"
+  },
+  "about": {
+    "title": "Acerca de LifeLegacy.me",
+    "introduction": "LifeLegacy.me es una plataforma integral de planificación de patrimonio digital diseñada para ayudarte a asegurar tu legado digital y garantizar que tus activos digitales estén protegidos y transferidos según tus deseos.",
+    "mission": "Nuestra misión es simplificar el complejo proceso de planificación de patrimonio digital, haciéndolo accesible y comprensible para todos. Creemos que todos merecen tener control sobre su legado digital, independientemente de su experiencia técnica.",
+    "vision": "Nuestra visión es crear un mundo donde la planificación del patrimonio digital sea tan común y sencilla como la planificación patrimonial tradicional, asegurando que tu vida digital se conserve y proteja para las generaciones futuras."
+  },
+  "pricing": {
+    "title": "Precios Simples y Transparentes",
+    "subtitle": "Elige el plan que se adapte a tus necesidades",
+    "monthly": "mes",
+    "getStarted": "Comenzar",
+    "contactSales": "Contactar a Ventas",
+    "basic": {
+      "title": "Básico",
+      "price": "9.99",
+      "feature1": "Almacena hasta 10GB de archivos de documentos",
+      "feature2": "Crea un testamento digital básico",
+      "feature3": "Añade hasta 5 beneficiarios"
+    },
+    "professional": {
+      "title": "Profesional",
+      "price": "19.99",
+      "feature1": "Almacena hasta 50GB de archivos de documentos",
+      "feature2": "Planificación completa de patrimonio digital",
+      "feature3": "Añade beneficiarios ilimitados",
+      "feature4": "Soporte prioritario al cliente"
+    },
+    "enterprise": {
+      "title": "Empresarial",
+      "price": "Personalizado",
+      "feature1": "Espacio de almacenamiento ilimitado",
+      "feature2": "Solución de marca blanca",
+      "feature3": "Gerente de cuenta dedicado",
+      "feature4": "Integraciones API personalizadas"
+    }
+  },
+  "features": {
+    "title": "Características",
+    "subtitle": "Todo lo que necesitas para la planificación de patrimonio digital",
+    "documentManagement": {
+      "title": "Gestión de Documentos",
+      "description": "Almacena, organiza y gestiona de forma segura todos tus documentos importantes en un solo lugar, desde testamentos y fideicomisos hasta contraseñas y detalles de cuentas."
+    },
+    "digitalAssets": {
+      "title": "Activos Digitales",
+      "description": "Cataloga tus activos digitales, incluidas cuentas de redes sociales, criptomonedas y compras digitales, para garantizar que tus herederos puedan acceder a lo que importa."
+    },
+    "beneficiaries": {
+      "title": "Gestión de Beneficiarios",
+      "description": "Designa fácilmente beneficiarios para activos específicos y controla exactamente quién obtiene acceso a qué cuando llegue el momento."
+    },
+    "security": {
+      "title": "Seguridad de Nivel Bancario",
+      "description": "Descansa tranquilo sabiendo que tu información sensible está protegida con protocolos y cifrado de seguridad líderes en la industria."
+    },
+    "notifications": {
+      "title": "Notificaciones Automáticas",
+      "description": "Configura notificaciones para mantener tu plan actualizado y asegurar que tus beneficiarios estén informados cuando sea necesario."
+    },
+    "planning": {
+      "title": "Planificación de Legado",
+      "description": "Herramientas intuitivas para guiarte a través del proceso de planificación patrimonial, asegurando que nada se pase por alto y que tus deseos sean claros."
+    }
+  }
+} 

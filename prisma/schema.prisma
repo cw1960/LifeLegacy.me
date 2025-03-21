@@ -1,0 +1,200 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Organization - represents a tenant (law firm, insurance agency, etc.)
+model Organization {
+  id            String    @id @default(uuid())
+  name          String
+  subdomain     String    @unique
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  description   String?
+  website       String?
+  active        Boolean   @default(true)
+  professionals Professional[]
+  clients       Client[]
+  branding      OrganizationBranding?
+  invitations   ClientInvitation[]
+  conversationHistory ConversationHistory[]
+
+  @@map("organizations")
+}
+
+// Branding settings for white-labeling
+model OrganizationBranding {
+  id            String    @id @default(uuid())
+  organizationId String    @unique @map("organization_id")
+  organization  Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  logoUrl       String?   @map("logo_url")
+  primaryColor  String?   @map("primary_color")
+  accentColor   String?   @map("accent_color")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  
+  // Logo images
+  logoSquareUrl String?
+  favicon         String?
+  
+  // Professional's contact information to display to clients
+  displayName     String?
+  contactEmail    String?
+  contactPhone    String?
+  bioHtml         String?  @db.Text // Rich text bio
+  profileImageUrl String?
+  
+  @@map("organization_brandings")
+}
+
+// Professional user - belongs to an organization
+model Professional {
+  id            String    @id
+  email         String    @unique
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  organizationId String    @map("organization_id")
+  organization  Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role          String    @default("member") // e.g., "admin", "member"
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  lastLoginAt   DateTime?
+  
+  // Auth provider ID (from Supabase)
+  authUserId    String    @unique
+  
+  // Clients managed by this professional
+  clients       Client[]
+  primaryClients Client[] @relation("PrimaryProfessional")
+
+  @@map("professionals")
+}
+
+// Client user - belongs to an organization, works with professionals
+model Client {
+  id            String    @id
+  email         String    @unique
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  organizationId String    @map("organization_id")
+  organization  Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  professionalId String?   @map("professional_id")
+  professional  Professional? @relation(fields: [professionalId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  active        Boolean   @default(true)
+  lastLoginAt   DateTime?
+  
+  // Authentication
+  authUserId        String?   @unique
+  hasLoggedIn       Boolean   @default(false)
+  
+  // Progress tracking
+  onboardingComplete Boolean  @default(false)
+  profileComplete    Boolean  @default(false)
+  docsUploaded       Int      @default(0)
+  
+  // Primary professional relationship
+  primaryProfessionalId String?
+  primaryProfessional   Professional? @relation("PrimaryProfessional", fields: [primaryProfessionalId], references: [id])
+  
+  // Client activity
+  activities        ClientActivity[]
+  
+  // Client documents
+  documents         Document[]
+  invitation        ClientInvitation?
+  digitalAssets     DigitalAsset[]
+
+  @@map("clients")
+}
+
+// Document - uploaded by or associated with a client
+model Document {
+  id            String    @id @default(uuid())
+  clientId      String    @map("client_id")
+  client        Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  documentType  String    @map("document_type") // e.g., "will", "insurance", "medical", etc.
+  title         String
+  description   String?
+  filePath      String    @map("file_path")
+  fileSize      Int       @map("file_size")
+  uploadedAt    DateTime  @default(now()) @map("uploaded_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("documents")
+}
+
+// Client activity - for tracking actions and progress
+model ClientActivity {
+  id            String    @id @default(uuid())
+  clientId      String    @map("client_id")
+  client        Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  activityType  String    @map("activity_type") // e.g., "login", "document_upload", "profile_update"
+  description   String
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@map("client_activities")
+}
+
+// Client invitation - for tracking invitations and status
+model ClientInvitation {
+  id            String    @id @default(uuid())
+  email         String
+  token         String    @unique
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  clientId      String?   @unique @map("client_id")
+  client        Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  organizationId String    @map("organization_id")
+  organization  Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  status        String    @default("pending") // "pending", "accepted", "expired"
+  notes         String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  expiresAt     DateTime  @map("expires_at")
+  acceptedAt    DateTime? @map("accepted_at")
+
+  @@map("client_invitations")
+}
+
+// Digital Assets for the Digital Locker
+model DigitalAsset {
+  id            String    @id @default(uuid())
+  clientId      String    @map("client_id")
+  client        Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  assetName     String    @map("asset_name")
+  assetType     String    @map("asset_type") // "document", "image", "video", "audio", "other"
+  filePath      String    @map("file_path")
+  storagePath   String    @map("storage_path")
+  description   String?
+  size          String
+  accessLevel   String    @map("access_level") // "private", "contacts", "public"
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("digital_assets")
+}
+
+// Conversation history for AI interactions
+model ConversationHistory {
+  id            String    @id @default(uuid())
+  organizationId String    @map("organization_id")
+  organization  Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId        String    @map("user_id")
+  sessionId     String    @map("session_id")
+  role          String    // "system", "user", "assistant"
+  content       String    @db.Text
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@map("conversation_history")
+}

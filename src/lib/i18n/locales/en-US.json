@@ -1,0 +1,112 @@
+{
+  "app": {
+    "name": "LifeLegacy.me",
+    "tagline": "Simplify your digital estate planning journey",
+    "description": "A secure platform for managing your digital legacy"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Log In",
+    "register": "Sign Up",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "emailRequired": "Email is required",
+    "validEmail": "Please enter a valid email",
+    "passwordRequired": "Password is required",
+    "minPassword": "Password must be at least 8 characters",
+    "confirmPassword": "Confirm Password",
+    "passwordMatch": "Passwords must match",
+    "loginSuccess": "Logged in successfully",
+    "registerSuccess": "Registered successfully",
+    "confirmEmail": "Please check your email to confirm your account",
+    "resetSuccess": "Password reset email sent",
+    "errorTitle": "Authentication Error",
+    "tryAgain": "Please try again or contact support"
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "login": "Log In",
+    "getStarted": "Get Started",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log Out"
+  },
+  "dashboard": {
+    "welcome": "Welcome to your dashboard",
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity"
+  },
+  "language": {
+    "en-US": "English (US)",
+    "es-MX": "Español (MX)",
+    "changeLanguage": "Change Language"
+  },
+  "about": {
+    "title": "About LifeLegacy.me",
+    "introduction": "LifeLegacy.me is a comprehensive digital estate planning platform designed to help you secure your digital legacy and ensure your digital assets are protected and transferred according to your wishes.",
+    "mission": "Our mission is to simplify the complex process of digital estate planning, making it accessible and understandable for everyone. We believe that everyone deserves to have control over their digital legacy, regardless of technical expertise.",
+    "vision": "Our vision is to create a world where digital estate planning is as common and straightforward as traditional estate planning, ensuring that your digital life is preserved and protected for generations to come."
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that's right for you",
+    "monthly": "month",
+    "getStarted": "Get Started",
+    "contactSales": "Contact Sales",
+    "basic": {
+      "title": "Basic",
+      "price": "9.99",
+      "feature1": "Store up to 10GB of document files",
+      "feature2": "Create a basic digital will",
+      "feature3": "Add up to 5 beneficiaries"
+    },
+    "professional": {
+      "title": "Professional",
+      "price": "19.99",
+      "feature1": "Store up to 50GB of document files",
+      "feature2": "Comprehensive digital estate planning",
+      "feature3": "Add unlimited beneficiaries",
+      "feature4": "Priority customer support"
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "price": "Custom",
+      "feature1": "Unlimited storage space",
+      "feature2": "White-labeled solution",
+      "feature3": "Dedicated account manager",
+      "feature4": "Custom API integrations"
+    }
+  },
+  "features": {
+    "title": "Features",
+    "subtitle": "Everything you need for digital estate planning",
+    "documentManagement": {
+      "title": "Document Management",
+      "description": "Securely store, organize, and manage all your important documents in one place, from wills and trusts to passwords and account details."
+    },
+    "digitalAssets": {
+      "title": "Digital Assets",
+      "description": "Catalog your digital assets including social media accounts, cryptocurrency, and digital purchases to ensure your heirs can access what matters."
+    },
+    "beneficiaries": {
+      "title": "Beneficiary Management",
+      "description": "Easily designate beneficiaries for specific assets and control exactly who gets access to what when the time comes."
+    },
+    "security": {
+      "title": "Bank-Level Security",
+      "description": "Rest easy knowing your sensitive information is protected with industry-leading encryption and security protocols."
+    },
+    "notifications": {
+      "title": "Automated Notifications",
+      "description": "Set up notifications to keep your plan updated and ensure your beneficiaries are informed when necessary."
+    },
+    "planning": {
+      "title": "Legacy Planning",
+      "description": "Intuitive tools to guide you through the estate planning process, ensuring nothing is missed and your wishes are clear."
+    }
+  }
+} 
