@@ -5,6 +5,15 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'font-sans',
+    'font-poppins',
+    'gradient-text',
+    'glass-card',
+    'shadow-md',
+    'shadow-lg',
+    'shadow-xl'
+  ],
   theme: {
     extend: {
       colors: {
@@ -50,6 +59,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
       },
       spacing: {
         '128': '32rem',

@@ -39,26 +39,42 @@ export default function OnboardingPage() {
     specialty: '',
   });
   const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function getUser() {
       const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        setUser(session.user);
-        // Pre-fill form data from user metadata
-        setFormData(prev => ({
-          ...prev,
-          firstName: session.user.user_metadata?.first_name || '',
-          lastName: session.user.user_metadata?.last_name || '',
-          email: session.user.email || '',
-        }));
+      
+      if (!session?.user) {
+        router.push('/auth/login?returnUrl=/onboarding');
+        return;
       }
+      
+      setUser(session.user);
+      setFormData(prev => ({
+        ...prev,
+        firstName: session.user.user_metadata?.first_name || '',
+        lastName: session.user.user_metadata?.last_name || '',
+        email: session.user.email || '',
+      }));
+      
+      setLoading(false);
     }
     
     getUser();
-  }, []);
+  }, [router]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-indigo-600 border-t-transparent mx-auto"></div>
+          <p className="mt-3 text-gray-700">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleNext = () => {
     setCurrentStep(prev => Math.min(prev + 1, steps.length - 1));
@@ -81,7 +97,6 @@ export default function OnboardingPage() {
     try {
       console.log('Creating professional record with user:', user);
       
-      // Generate a subdomain from organization name with timestamp to ensure uniqueness
       const timestamp = new Date().getTime().toString().slice(-6);
       const subdomain = formData.organizationName
         .toLowerCase()
@@ -89,7 +104,6 @@ export default function OnboardingPage() {
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '') + '-' + timestamp;
       
-      // Use the stored procedure to create both records in a single transaction
       const { data, error } = await supabase.rpc('create_organization_and_professional', {
         org_name: formData.organizationName,
         org_subdomain: subdomain,
@@ -115,7 +129,6 @@ export default function OnboardingPage() {
       
       console.log('Organization and professional created successfully:', data);
       
-      // Move to the success step
       handleNext();
       
     } catch (err: any) {
@@ -135,7 +148,6 @@ export default function OnboardingPage() {
       <div className="card max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold text-slate-900 mb-8">Professional Onboarding</h1>
         
-        {/* Progress Steps */}
         <nav aria-label="Progress" className="mb-10">
           <ol className="flex items-center">
             {steps.map((step, index) => (
@@ -174,7 +186,6 @@ export default function OnboardingPage() {
           </ol>
         </nav>
 
-        {/* Error message */}
         {error && (
           <div className="mb-8 rounded-md bg-red-50 border border-red-200 p-4">
             <div className="flex">
@@ -190,7 +201,6 @@ export default function OnboardingPage() {
           </div>
         )}
 
-        {/* Form Steps */}
         <div className="mt-8">
           {currentStep === 0 && (
             <PersonalInfoForm 

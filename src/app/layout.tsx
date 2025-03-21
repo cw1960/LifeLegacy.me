@@ -1,29 +1,45 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter, Poppins } from 'next/font/google';
+
+// Add a link to Font Awesome CDN instead of package imports
+export const metadata: Metadata = {
+  title: 'LifeLegacy.me - Digital Estate Planning',
+  description: 'Simplified digital estate planning for professionals to offer as a value-added service',
+};
 
 const inter = Inter({ 
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
-export const metadata: Metadata = {
-  title: "LifeLegacy | Digital Estate Planning",
-  description: "Modern digital estate planning solutions made conversational and easy to use",
-};
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
-        <main className="flex min-h-screen flex-col">
-          {children}
-        </main>
+    <html lang="en">
+      <head>
+        <link 
+          rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossOrigin="anonymous" 
+          referrerPolicy="no-referrer" 
+        />
+      </head>
+      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-gradient-to-br from-slate-50 to-slate-100`}>
+        {children}
+        <div className="hidden font-sans font-poppins" />
       </body>
     </html>
   );

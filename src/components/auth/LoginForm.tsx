@@ -42,9 +42,7 @@ export default function LoginForm() {
         <div className="mb-6 rounded-md bg-red-50 border border-red-200 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
+              <i className="fas fa-exclamation-triangle text-red-500"></i>
             </div>
             <div className="ml-3">
               <p className="text-sm text-red-800 font-medium">{error}</p>
@@ -54,11 +52,12 @@ export default function LoginForm() {
       )}
 
       <form className="space-y-6" onSubmit={handleLogin}>
-        <div>
+        <div className="transition-all duration-300 hover:translate-y-[-2px]">
           <label
             htmlFor="email"
             className="block text-sm font-medium text-slate-700 mb-1"
           >
+            <i className="fas fa-envelope mr-2 text-primary-500"></i>
             Email address
           </label>
           <input
@@ -69,16 +68,17 @@ export default function LoginForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="input"
+            className="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300"
             placeholder="you@example.com"
           />
         </div>
 
-        <div>
+        <div className="transition-all duration-300 hover:translate-y-[-2px]">
           <label
             htmlFor="password"
             className="block text-sm font-medium text-slate-700 mb-1"
           >
+            <i className="fas fa-lock mr-2 text-primary-500"></i>
             Password
           </label>
           <input
@@ -89,16 +89,16 @@ export default function LoginForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="input"
+            className="flex h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300"
             placeholder="••••••••"
           />
         </div>
 
-        <div>
+        <div className="transition-all duration-300 hover:translate-y-[-2px]">
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary w-full"
+            className="inline-flex items-center justify-center rounded-md w-full h-10 px-6 py-2 text-sm font-medium bg-primary-600 text-white hover:bg-primary-700 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px] focus:outline-none"
           >
             {loading ? (
               <span className="flex items-center justify-center">
@@ -109,7 +109,10 @@ export default function LoginForm() {
                 Signing in...
               </span>
             ) : (
-              'Sign in'
+              <>
+                <i className="fas fa-sign-in-alt mr-2"></i>
+                Sign in
+              </>
             )}
           </button>
         </div>
