@@ -1,25 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
 
 // Add a link to Font Awesome CDN instead of package imports
 export const metadata: Metadata = {
   title: 'LifeLegacy.me - Digital Estate Planning',
   description: 'Simplified digital estate planning for professionals to offer as a value-added service',
 };
-
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
-const poppins = Poppins({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-});
 
 export default function RootLayout({
   children,
@@ -37,9 +23,8 @@ export default function RootLayout({
           referrerPolicy="no-referrer" 
         />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-gradient-to-br from-slate-50 to-slate-100`}>
+      <body className="font-sans antialiased bg-gradient-to-br from-slate-50 to-slate-100">
         {children}
-        <div className="hidden font-sans font-poppins" />
       </body>
     </html>
   );

@@ -1,12 +1,8 @@
-import React from 'react';
-import type { Metadata } from 'next';
-import LoginForm from '@/components/auth/LoginForm';
-import Link from 'next/link';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'LifeLegacy - Login',
-  description: 'Log in to your LifeLegacy account',
-};
+import React from 'react';
+import Link from 'next/link';
+import LoginForm from '@/components/auth/LoginForm';
 
 export default function LoginPage() {
   return (

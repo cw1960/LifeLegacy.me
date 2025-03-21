@@ -2,12 +2,11 @@
 const nextConfig = {
   /* config options here */
   reactStrictMode: true,
-  experimental: {},
-  images: {
-    domains: ['localhost'],
+  experimental: {
+    optimizePackageImports: ['@headlessui/react'],
   },
-  webpack: (config) => {
-    return config;
+  images: {
+    domains: ['localhost', 'lh3.googleusercontent.com'],
   },
 };
 

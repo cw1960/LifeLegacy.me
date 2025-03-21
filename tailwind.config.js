@@ -7,12 +7,38 @@ module.exports = {
   ],
   safelist: [
     'font-sans',
-    'font-poppins',
     'gradient-text',
     'glass-card',
+    'bg-white/90',
+    'backdrop-blur-sm',
+    'text-transparent',
+    'bg-clip-text',
+    'bg-gradient-to-r',
+    'from-primary-600',
+    'to-primary-400',
     'shadow-md',
     'shadow-lg',
-    'shadow-xl'
+    'shadow-xl',
+    'btn',
+    'btn-primary',
+    'btn-secondary',
+    'btn-outline',
+    'btn-lg',
+    'btn-md',
+    'btn-sm',
+    'card',
+    'input',
+    'container-xl',
+    'container-lg',
+    'container-md',
+    'container-sm',
+    'hero-section',
+    'hero-title',
+    'hero-subtitle',
+    'hero-description',
+    'feature-card',
+    'feature-icon',
+    'testimonial-card'
   ],
   theme: {
     extend: {
@@ -58,8 +84,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       spacing: {
         '128': '32rem',
