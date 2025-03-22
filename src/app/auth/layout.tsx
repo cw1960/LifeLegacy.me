@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { Container } from 'react-bootstrap';
 
 export const metadata: Metadata = {
   title: 'LifeLegacy - Authentication',
@@ -12,7 +13,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <main className="min-vh-100 bg-light">
       {children}
     </main>
   );

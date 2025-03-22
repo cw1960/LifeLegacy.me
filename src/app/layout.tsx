@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { SSRProvider } from 'react-bootstrap';
 
 // Add a link to Font Awesome CDN instead of package imports
 export const metadata: Metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
-        {children}
+        <SSRProvider>
+          {children}
+        </SSRProvider>
       </body>
     </html>
   );

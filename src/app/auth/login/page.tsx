@@ -3,43 +3,50 @@
 import React from 'react';
 import Link from 'next/link';
 import LoginForm from '@/components/auth/LoginForm';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
 export default function LoginPage() {
   return (
-    <div className="flex items-center justify-center p-6">
-      <div className="glass-card max-w-md w-full">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block">
-            <span className="sr-only">LifeLegacy - Home</span>
-            <h1 className="text-3xl font-bold">
-              <span className="text-primary-600">Life</span>
-              <span className="text-primary-800">Legacy</span>
-            </h1>
-          </Link>
-          <h2 className="mt-4 text-xl font-semibold gradient-text">
-            Welcome back
-          </h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Sign in to your account to manage your digital legacy
-          </p>
-        </div>
-        
-        <LoginForm />
-        
-        <div className="mt-8 text-center">
-          <p className="text-sm text-slate-600">
-            Don&apos;t have an account?{' '}
-            <Link href="/auth/register" className="text-primary-600 hover:text-primary-500 font-medium">
-              Sign up
-            </Link>
-          </p>
-          <p className="text-sm text-slate-600 mt-2">
-            <Link href="/auth/forgot-password" className="text-primary-600 hover:text-primary-500 font-medium">
-              Forgot your password?
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>
+    <Container className="py-5">
+      <Row className="justify-content-center">
+        <Col xs={12} md={8} lg={6} xl={5}>
+          <Card className="glass-card">
+            <Card.Body className="p-4">
+              <div className="text-center mb-4">
+                <Link href="/" className="text-decoration-none d-inline-block">
+                  <span className="visually-hidden">LifeLegacy - Home</span>
+                  <h1 className="fs-2 fw-bold">
+                    <span className="text-primary">Life</span>
+                    <span style={{ color: '#0369a1' }}>Legacy</span>
+                  </h1>
+                </Link>
+                <h2 className="mt-3 fs-4 fw-semibold gradient-text">
+                  Welcome back
+                </h2>
+                <p className="mt-2 text-secondary fs-6">
+                  Sign in to your account to manage your digital legacy
+                </p>
+              </div>
+              
+              <LoginForm />
+              
+              <div className="mt-4 text-center">
+                <p className="text-secondary fs-6">
+                  Don&apos;t have an account?{' '}
+                  <Link href="/auth/register" className="text-primary text-decoration-none fw-medium">
+                    Sign up
+                  </Link>
+                </p>
+                <p className="text-secondary fs-6 mt-2">
+                  <Link href="/auth/forgot-password" className="text-primary text-decoration-none fw-medium">
+                    Forgot your password?
+                  </Link>
+                </p>
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 } 
