@@ -6,61 +6,51 @@ import LoginForm from '@/components/auth/LoginForm';
 
 export default function LoginPage() {
   return (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
+    <div style={{
+      display: 'flex',
+      minHeight: '100vh',
+      alignItems: 'center',
+      justifyContent: 'center',
       padding: '1.5rem',
-      minHeight: '100vh'
+      backgroundColor: '#f1f5f9'
     }}>
-      <div style={{ 
-        maxWidth: '400px', 
-        width: '100%', 
+      <div style={{
+        width: '100%',
+        maxWidth: '32rem',
+        padding: '2rem',
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(8px)',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
         borderRadius: '0.75rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        padding: '1.5rem'
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        border: '1px solid rgba(255, 255, 255, 0.2)'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link href="/" style={{ display: 'inline-block', textDecoration: 'none' }}>
-            <span style={{ position: 'absolute', width: '1px', height: '1px', padding: '0', margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: '0' }}>
-              LifeLegacy - Home
-            </span>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-              <span style={{ color: '#0284c7' }}>Life</span>
-              <span style={{ color: '#0369a1' }}>Legacy</span>
-            </h1>
-          </Link>
+        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
           <h2 style={{ 
-            marginTop: '1rem', 
-            fontSize: '1.25rem', 
-            fontWeight: '600',
-            background: 'linear-gradient(90deg, #0284c7, #38bdf8)',
+            fontSize: '1.875rem',
+            fontWeight: '700',
+            marginBottom: '0.5rem',
+            background: 'linear-gradient(to right, #0284c7, #38bdf8)',
             WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
+            WebkitTextFillColor: 'transparent'
           }}>
-            Welcome back
+            Welcome Back
           </h2>
-          <p style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: '#64748b' }}>
-            Sign in to your account to manage your digital legacy
+          <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
+            Sign in to access your LifeLegacy account
           </p>
         </div>
         
         <LoginForm />
         
-        <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.875rem', color: '#64748b' }}>
-            Don&apos;t have an account?{' '}
-            <Link href="/auth/register" style={{ color: '#0284c7', fontWeight: '500', textDecoration: 'none' }}>
+        <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem' }}>
+          <p style={{ color: '#64748b' }}>
+            Don't have an account?{' '}
+            <Link href="/auth/register" style={{ 
+              color: '#0284c7', 
+              textDecoration: 'none',
+              fontWeight: '500'
+            }}>
               Sign up
-            </Link>
-          </p>
-          <p style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem' }}>
-            <Link href="/auth/forgot-password" style={{ color: '#0284c7', fontWeight: '500', textDecoration: 'none' }}>
-              Forgot your password?
             </Link>
           </p>
         </div>

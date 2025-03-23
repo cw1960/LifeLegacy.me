@@ -6,30 +6,50 @@ import RegisterForm from '@/components/auth/RegisterForm';
 
 export default function RegisterPage() {
   return (
-    <div className="w-full max-w-md">
-      <div className="max-w-md w-full rounded-xl bg-white/90 backdrop-blur-sm shadow-xl p-6 border border-white/20">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block">
-            <span className="sr-only">LifeLegacy - Home</span>
-            <h1 className="text-3xl font-bold">
-              <span className="text-primary-600">Life</span>
-              <span className="text-primary-800">Legacy</span>
-            </h1>
-          </Link>
-          <h2 className="mt-4 text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-400">
-            Create your account
+    <div style={{
+      display: 'flex',
+      minHeight: '100vh',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1.5rem',
+      backgroundColor: '#f1f5f9'
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth: '32rem',
+        padding: '2rem',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(8px)',
+        borderRadius: '0.75rem',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        border: '1px solid rgba(255, 255, 255, 0.2)'
+      }}>
+        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+          <h2 style={{ 
+            fontSize: '1.875rem',
+            fontWeight: '700',
+            marginBottom: '0.5rem',
+            background: 'linear-gradient(to right, #0284c7, #38bdf8)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Create an Account
           </h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Start building your digital estate plan
+          <p style={{ color: '#64748b', fontSize: '0.875rem' }}>
+            Join LifeLegacy and start planning your future today
           </p>
         </div>
         
         <RegisterForm />
         
-        <div className="mt-8 text-center">
-          <p className="text-sm text-slate-600">
+        <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem' }}>
+          <p style={{ color: '#64748b' }}>
             Already have an account?{' '}
-            <Link href="/auth/login" className="text-primary-600 hover:text-primary-500 font-medium">
+            <Link href="/auth/login" style={{ 
+              color: '#0284c7', 
+              textDecoration: 'none',
+              fontWeight: '500'
+            }}>
               Sign in
             </Link>
           </p>
