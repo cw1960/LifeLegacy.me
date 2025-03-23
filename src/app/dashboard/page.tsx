@@ -92,344 +92,244 @@ export default function DashboardPage() {
     getUser();
   }, [router]);
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/');
+    router.refresh();
+  };
+
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#f1f5f9'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center' 
+        }}>
+          <svg 
+            style={{ 
+              animation: 'spin 1s linear infinite',
+              height: '3rem',
+              width: '3rem',
+              color: '#0284c7'
+            }} 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24"
+          >
+            <circle 
+              style={{ opacity: 0.25 }} 
+              cx="12" 
+              cy="12" 
+              r="10" 
+              stroke="currentColor" 
+              strokeWidth="4"
+            ></circle>
+            <path 
+              style={{ opacity: 0.75 }} 
+              fill="currentColor" 
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          <p style={{ 
+            marginTop: '1rem', 
+            fontSize: '0.875rem', 
+            color: '#64748b',
+            fontWeight: '500'
+          }}>
+            Loading your dashboard...
+          </p>
+        </div>
+        <style jsx>{`
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
-    <div className="container-lg py-16">
-      <h1 className="text-3xl font-bold gradient-text mb-8">Professional Dashboard</h1>
-      
-      {needsSetup && (
-        <div className="mb-8 rounded-md bg-red-50 border border-red-200 p-4 shadow-md">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <i className="fas fa-exclamation-circle text-red-500 text-lg"></i>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-red-800">
-                <span className="font-medium">Database setup required:</span> The database schema is not properly initialized. Please contact your system administrator.
-              </p>
-            </div>
-          </div>
+    <div style={{
+      backgroundColor: '#f1f5f9',
+      minHeight: '100vh'
+    }}>
+      {/* Header */}
+      <header style={{
+        backgroundColor: 'white',
+        padding: '1rem',
+        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <div style={{ 
+          fontSize: '1.25rem', 
+          fontWeight: 'bold', 
+          background: 'linear-gradient(to right, #0284c7, #38bdf8)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent' 
+        }}>
+          LifeLegacy
         </div>
-      )}
-      
-      {!loading && user && !professional && !needsSetup && (
-        <div className="mb-8 rounded-md bg-amber-50 border border-amber-200 p-4 shadow-md">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <i className="fas fa-exclamation-triangle text-amber-500 text-lg"></i>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0.5rem',
+            borderRadius: '9999px',
+            backgroundColor: '#f1f5f9'
+          }}>
+            <div style={{
+              width: '2rem',
+              height: '2rem',
+              borderRadius: '9999px',
+              backgroundColor: '#0284c7',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: '600',
+              fontSize: '0.875rem'
+            }}>
+              {user?.email?.charAt(0).toUpperCase() || 'U'}
             </div>
-            <div className="ml-3">
-              <p className="text-sm text-amber-800">
-                <span className="font-medium">Complete your onboarding:</span> You need to complete your professional profile to access all features and manage clients.
-              </p>
-              <div className="mt-4">
-                <Link
-                  href="/onboarding"
-                  className="btn btn-primary btn-md shadow-md hover:shadow-lg"
-                >
-                  <i className="fas fa-user-plus mr-2"></i>
-                  Complete Professional Onboarding
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {/* Display error message if any */}
-      {error && !needsSetup && (
-        <div className="mb-8 rounded-md bg-red-50 border border-red-200 p-4 shadow-md">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <i className="fas fa-exclamation-circle text-red-500 text-lg"></i>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-red-800">{error.message}</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Show loading indicator */}
-      {loading && (
-        <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-t-2 border-primary-600"></div>
-        </div>
-      )}
-
-      {/* Professional dashboard content */}
-      {!loading && professional && (
-        <section className="space-y-8">
-          {/* User Information */}
-          <div className="card">
-            <h2 className="text-xl font-semibold text-slate-900 mb-6">Personal Information</h2>
-            
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div className="space-y-1">
-                <h3 className="text-sm font-medium text-slate-500">Name</h3>
-                <p className="text-slate-900">{professional.first_name} {professional.last_name}</p>
-              </div>
-              
-              <div className="space-y-1">
-                <h3 className="text-sm font-medium text-slate-500">Email</h3>
-                <p className="text-slate-900">{professional.email}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="card p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 bg-primary-100 rounded-full p-3">
-                  <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </div>
-                <div className="ml-5">
-                  <h3 className="text-sm font-medium text-slate-500">Total Clients</h3>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">24</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="card p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 bg-primary-100 rounded-full p-3">
-                  <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="ml-5">
-                  <h3 className="text-sm font-medium text-slate-500">Active This Week</h3>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">8</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="card p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 bg-primary-100 rounded-full p-3">
-                  <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                </div>
-                <div className="ml-5">
-                  <h3 className="text-sm font-medium text-slate-500">Plan Completion</h3>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">67%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick actions */}
-          <div className="card">
-            <h2 className="text-xl font-semibold text-slate-900 mb-6">Quick Actions</h2>
-            
-            <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-              <Link 
-                href="/dashboard/invites/new"
-                className="btn btn-primary btn-md w-full"
-              >
-                Invite Client
-              </Link>
-              
-              <Link 
-                href="/dashboard/profile"
-                className="btn btn-outline btn-md w-full"
-              >
-                Edit Profile
-              </Link>
-              
-              <Link 
-                href="/dashboard/clients"
-                className="btn btn-outline btn-md w-full"
-              >
-                Manage Clients
-              </Link>
-              
-              <Link 
-                href="/dashboard/settings"
-                className="btn btn-outline btn-md w-full"
-              >
-                Settings
-              </Link>
-            </div>
+            <span style={{ 
+              marginLeft: '0.5rem', 
+              marginRight: '0.5rem',
+              fontSize: '0.875rem',
+              color: '#334155',
+              fontWeight: '500'
+            }}>
+              {user?.email}
+            </span>
           </div>
           
-          {/* Recent Activity */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-slate-900">Recent Activity</h2>
-              <Link href="/dashboard/activity" className="text-sm font-medium text-primary-600 hover:text-primary-700">
-                View All
-              </Link>
+          <button
+            onClick={handleSignOut}
+            style={{
+              backgroundColor: 'transparent',
+              border: '1px solid #e2e8f0',
+              borderRadius: '0.375rem',
+              padding: '0.5rem 1rem',
+              fontSize: '0.875rem',
+              color: '#64748b',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            Sign Out
+          </button>
+        </div>
+      </header>
+      
+      {/* Main Content */}
+      <main style={{ padding: '2rem' }}>
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '0.5rem',
+          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+          padding: '1.5rem'
+        }}>
+          <h1 style={{ 
+            fontSize: '1.5rem', 
+            fontWeight: '600', 
+            color: '#1e293b',
+            marginBottom: '1rem'
+          }}>
+            Welcome to your Dashboard
+          </h1>
+          
+          <p style={{ color: '#64748b', marginBottom: '1.5rem' }}>
+            This is where you'll manage your digital legacy. We're still building out features, so check back soon for updates!
+          </p>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: '1rem',
+            marginTop: '2rem'
+          }}>
+            {/* Feature Card 1 */}
+            <div style={{
+              backgroundColor: '#f8fafc',
+              borderRadius: '0.5rem',
+              padding: '1.5rem',
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{
+                height: '3rem',
+                width: '3rem',
+                backgroundColor: '#dbeafe',
+                borderRadius: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1rem'
+              }}>
+                <svg
+                  style={{ height: '1.5rem', width: '1.5rem', color: '#2563eb' }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.5rem' }}>
+                Document Storage
+              </h3>
+              <p style={{ fontSize: '0.875rem', color: '#64748b' }}>
+                Securely store important documents and make them accessible to trusted contacts when needed.
+              </p>
             </div>
             
-            <div className="space-y-4">
-              {[1, 2, 3].map((_, index) => (
-                <div key={index} className="flex items-start p-4 rounded-md bg-slate-50">
-                  <div className="flex-shrink-0 mr-4">
-                    <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
-                      <svg className="h-5 w-5 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-slate-900 font-medium">Client {index + 1} updated their profile</p>
-                    <p className="text-sm text-slate-500 mt-1">Just now</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {professional && (
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <div className="card">
-            <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
-            <div className="space-y-4">
-              <Link href="/dashboard/clients" className="block w-full btn btn-secondary">
-                Manage Clients
-              </Link>
-              <Link href="/conversation-demo" className="block w-full btn btn-primary">
-                Try Conversational Interface
-              </Link>
+            {/* Feature Card 2 */}
+            <div style={{
+              backgroundColor: '#f8fafc',
+              borderRadius: '0.5rem',
+              padding: '1.5rem',
+              border: '1px solid #e2e8f0'
+            }}>
+              <div style={{
+                height: '3rem',
+                width: '3rem',
+                backgroundColor: '#dcfce7',
+                borderRadius: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1rem'
+              }}>
+                <svg
+                  style={{ height: '1.5rem', width: '1.5rem', color: '#16a34a' }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: '#1e293b', marginBottom: '0.5rem' }}>
+                Trusted Contacts
+              </h3>
+              <p style={{ fontSize: '0.875rem', color: '#64748b' }}>
+                Designate trusted individuals who will have access to your digital assets when needed.
+              </p>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Digital Estate Planning Modules */}
-      {!loading && (professional || user) && (
-        <section className="mt-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">Digital Estate Planning</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Online Accounts Module */}
-            <div className="card hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                    <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold ml-4">Online Accounts</h3>
-                </div>
-                <p className="text-slate-600 mb-6">
-                  Securely document your online accounts for your designated contacts to access when needed.
-                </p>
-                <Link href="/online-accounts" className="btn btn-outline btn-md w-full">
-                  Open Module
-                </Link>
-              </div>
-            </div>
-            
-            {/* Digital Assets Module */}
-            <div className="card hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                    <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold ml-4">Digital Assets</h3>
-                </div>
-                <p className="text-slate-600 mb-6">
-                  Document and plan for the future of your cryptocurrency, NFTs, and other valuable digital assets.
-                </p>
-                <Link href="/digital-assets" className="btn btn-outline btn-md w-full">
-                  Open Module
-                </Link>
-              </div>
-            </div>
-            
-            {/* Physical Documents Module */}
-            <div className="card hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                    <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold ml-4">Physical Documents</h3>
-                </div>
-                <p className="text-slate-600 mb-6">
-                  Create a guide to where your important physical documents are located and how to access them.
-                </p>
-                <Link href="/physical-documents" className="btn btn-outline btn-md w-full">
-                  Open Module
-                </Link>
-              </div>
-            </div>
-            
-            {/* End of Life Instructions Module */}
-            <div className="card hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                    <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold ml-4">End-of-Life Instructions</h3>
-                </div>
-                <p className="text-slate-600 mb-6">
-                  Document your funeral preferences, final wishes, and instructions for your loved ones.
-                </p>
-                <Link href="/end-of-life-instructions" className="btn btn-outline btn-md w-full">
-                  Open Module
-                </Link>
-              </div>
-            </div>
-            
-            {/* Legacy Planning Module */}
-            <div className="card hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                    <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold ml-4">Legacy Planning</h3>
-                </div>
-                <p className="text-slate-600 mb-6">
-                  Document your life story and create a meaningful legacy that preserves your values and wisdom.
-                </p>
-                <Link href="/legacy-planning" className="btn btn-outline btn-md w-full">
-                  Open Module
-                </Link>
-              </div>
-            </div>
-            
-            {/* AI Assistant */}
-            <div className="card hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                    <svg className="h-6 w-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold ml-4">AI Assistant</h3>
-                </div>
-                <p className="text-slate-600 mb-6">
-                  Get personalized estate planning guidance with our AI assistant powered by Claude.
-                </p>
-                <Link href="/conversation-demo" className="btn btn-outline btn-md w-full">
-                  Open Assistant
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      </main>
     </div>
   );
 } 
