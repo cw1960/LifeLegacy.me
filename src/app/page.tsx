@@ -26,11 +26,11 @@ const HomePage = () => {
       <div style={{ padding: '50px 0', background: '#f0f9ff', borderRadius: '10px', marginBottom: '30px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '20px' }}>
-            Preserve Your Legacy for Future Generations
+            Elevate Your Practice with Digital Estate Planning
           </h1>
           <p style={{ fontSize: '1.25rem', color: '#4a5568', maxWidth: '800px', marginBottom: '30px' }}>
-            Secure, organize, and share your memories, documents, and wishes with loved ones.
-            The complete digital estate planning solution.
+            For Estate Attorneys, Insurance Agents, and Financial Planners: Streamline client services,
+            increase retention, and grow your business with our comprehensive platform.
           </p>
           <div style={{ display: 'flex', gap: '15px' }}>
             <button 
@@ -45,7 +45,7 @@ const HomePage = () => {
                 cursor: 'pointer'
               }}
             >
-              Get Started Free
+              Start Free Trial
             </button>
             <button 
               onClick={() => router.push('/about')}
@@ -59,7 +59,7 @@ const HomePage = () => {
                 cursor: 'pointer'
               }}
             >
-              Learn More
+              Schedule Demo
             </button>
           </div>
         </div>
@@ -68,15 +68,15 @@ const HomePage = () => {
       {/* Features section */}
       <div style={{ padding: '40px 0', background: 'white', borderRadius: '10px' }}>
         <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px' }}>
-          Why Choose LifeLegacy?
+          Why Professionals Choose LifeLegacy
         </h2>
         
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
           {[
-            { title: 'Secure Storage', description: 'All your documents and memories are encrypted and stored securely.' },
-            { title: 'Memory Preservation', description: 'Record your life stories and memories for future generations.' },
-            { title: 'Easy Sharing', description: 'Share your legacy items with family and loved ones effortlessly.' },
-            { title: 'Family Collaboration', description: 'Collaborate with family members to build your shared history.' }
+            { title: 'Client Acquisition', description: 'Attract new clients with a modern, technology-forward approach to estate planning.' },
+            { title: 'Service Expansion', description: 'Offer comprehensive digital estate planning as a value-added service to existing clients.' },
+            { title: 'Efficient Management', description: 'Streamline your practice with powerful client management and document organization tools.' },
+            { title: 'Client Engagement', description: 'Increase client retention through meaningful digital touchpoints and collaborative features.' }
           ].map((feature, index) => (
             <div key={index} style={{ 
               width: '260px', 
@@ -109,10 +109,11 @@ const HomePage = () => {
         textAlign: 'center'
       }}>
         <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '15px' }}>
-          Ready to Preserve Your Legacy?
+          Ready to Transform Your Practice?
         </h2>
         <p style={{ fontSize: '1.125rem', marginBottom: '25px', maxWidth: '800px', margin: '0 auto 25px' }}>
-          Join thousands of others who are using LifeLegacy to document their life stories and secure their digital legacy.
+          Join professionals across the financial, legal, and insurance sectors who are using LifeLegacy 
+          to enhance their services and grow their client base.
         </p>
         <button 
           onClick={() => router.push('/auth/register')}
@@ -126,7 +127,7 @@ const HomePage = () => {
             cursor: 'pointer'
           }}
         >
-          Start For Free
+          Get Started
         </button>
       </div>
     </div>
