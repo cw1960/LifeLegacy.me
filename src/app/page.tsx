@@ -2,153 +2,135 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShieldAlt, faHistory, faPaperPlane, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
-export default function HomePage() {
+const HomePage = () => {
   const router = useRouter();
 
-  const navigateTo = (path: string) => {
-    router.push(path);
-  };
+  // Log for debugging
+  console.log('HomePage rendering');
 
   return (
-    <div>
+    <div style={{ fontFamily: 'system-ui, sans-serif', maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+      <div style={{ 
+        padding: '20px', 
+        background: 'red', 
+        color: 'white', 
+        fontSize: '24px',
+        margin: '20px',
+        border: '5px solid black' 
+      }}>
+        This is a test component. If you can see this RED BOX, React is rendering correctly.
+      </div>
+      
       {/* Hero section */}
-      <div className="hero-section">
-        <Container>
-          <Row className="align-items-center">
-            <Col lg={6} className="mb-5 mb-lg-0">
-              <h1 className="display-4 fw-bold mb-4">Preserve Your Legacy for Future Generations</h1>
-              <p className="lead text-secondary mb-4">
-                Secure, organize, and share your memories, documents, and wishes with loved ones.
-                The complete digital estate planning solution.
-              </p>
-              <div className="d-flex flex-wrap gap-3">
-                <Button 
-                  variant="primary" 
-                  size="lg" 
-                  onClick={() => navigateTo('/auth/register')}
-                >
-                  Get Started Free
-                </Button>
-                <Button 
-                  variant="outline-primary" 
-                  size="lg" 
-                  onClick={() => navigateTo('/about')}
-                >
-                  Learn More
-                </Button>
-              </div>
-            </Col>
-            <Col lg={6}>
-              <div className="text-center">
-                <img 
-                  src="/images/hero-image.png" 
-                  alt="Digital Legacy Planning" 
-                  className="img-fluid rounded shadow"
-                  style={{ maxHeight: '500px' }}
-                />
-              </div>
-            </Col>
-          </Row>
-        </Container>
+      <div style={{ padding: '50px 0', background: '#f0f9ff', borderRadius: '10px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '20px' }}>
+            Preserve Your Legacy for Future Generations
+          </h1>
+          <p style={{ fontSize: '1.25rem', color: '#4a5568', maxWidth: '800px', marginBottom: '30px' }}>
+            Secure, organize, and share your memories, documents, and wishes with loved ones.
+            The complete digital estate planning solution.
+          </p>
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <button 
+              onClick={() => router.push('/auth/register')}
+              style={{ 
+                background: '#0284c7', 
+                color: 'white',
+                padding: '12px 24px',
+                border: 'none',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              Get Started Free
+            </button>
+            <button 
+              onClick={() => router.push('/about')}
+              style={{ 
+                background: 'white', 
+                color: '#0284c7',
+                padding: '12px 24px',
+                border: '1px solid #0284c7',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Features section */}
-      <section className="py-5 bg-white">
-        <Container className="py-4">
-          <Row className="text-center mb-5">
-            <Col>
-              <h2 className="display-5 fw-bold mb-3">Why Choose LifeLegacy?</h2>
-              <p className="lead text-secondary mx-auto" style={{ maxWidth: '700px' }}>
-                Our platform makes it easy to preserve what matters most and share it with those you love.
+      <div style={{ padding: '40px 0', background: 'white', borderRadius: '10px' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '30px' }}>
+          Why Choose LifeLegacy?
+        </h2>
+        
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
+          {[
+            { title: 'Secure Storage', description: 'All your documents and memories are encrypted and stored securely.' },
+            { title: 'Memory Preservation', description: 'Record your life stories and memories for future generations.' },
+            { title: 'Easy Sharing', description: 'Share your legacy items with family and loved ones effortlessly.' },
+            { title: 'Family Collaboration', description: 'Collaborate with family members to build your shared history.' }
+          ].map((feature, index) => (
+            <div key={index} style={{ 
+              width: '260px', 
+              padding: '20px', 
+              border: '1px solid #e2e8f0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '10px' }}>
+                {feature.title}
+              </h3>
+              <p style={{ color: '#4a5568' }}>
+                {feature.description}
               </p>
-            </Col>
-          </Row>
-          
-          <Row>
-            <Col md={6} lg={3} className="mb-4">
-              <Card className="h-100 shadow-sm border-0 p-3">
-                <Card.Body className="text-center">
-                  <div className="text-primary mb-3">
-                    <FontAwesomeIcon icon={faShieldAlt} size="3x" />
-                  </div>
-                  <Card.Title className="fw-bold">Secure Storage</Card.Title>
-                  <Card.Text>
-                    All your documents and memories are encrypted and stored securely.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            
-            <Col md={6} lg={3} className="mb-4">
-              <Card className="h-100 shadow-sm border-0 p-3">
-                <Card.Body className="text-center">
-                  <div className="text-primary mb-3">
-                    <FontAwesomeIcon icon={faHistory} size="3x" />
-                  </div>
-                  <Card.Title className="fw-bold">Memory Preservation</Card.Title>
-                  <Card.Text>
-                    Record your life stories and memories for future generations.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            
-            <Col md={6} lg={3} className="mb-4">
-              <Card className="h-100 shadow-sm border-0 p-3">
-                <Card.Body className="text-center">
-                  <div className="text-primary mb-3">
-                    <FontAwesomeIcon icon={faPaperPlane} size="3x" />
-                  </div>
-                  <Card.Title className="fw-bold">Easy Sharing</Card.Title>
-                  <Card.Text>
-                    Share your legacy items with family and loved ones effortlessly.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            
-            <Col md={6} lg={3} className="mb-4">
-              <Card className="h-100 shadow-sm border-0 p-3">
-                <Card.Body className="text-center">
-                  <div className="text-primary mb-3">
-                    <FontAwesomeIcon icon={faUserFriends} size="3x" />
-                  </div>
-                  <Card.Title className="fw-bold">Family Collaboration</Card.Title>
-                  <Card.Text>
-                    Collaborate with family members to build your shared history.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* CTA section */}
-      <section className="py-5 bg-light">
-        <Container className="py-4">
-          <Row className="justify-content-center text-center">
-            <Col md={8}>
-              <h2 className="display-6 fw-bold mb-4">Ready to Preserve Your Legacy?</h2>
-              <p className="lead mb-4">
-                Join thousands of others who are using LifeLegacy to document their life stories and secure their digital legacy.
-              </p>
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="px-5" 
-                onClick={() => navigateTo('/auth/register')}
-              >
-                Start For Free
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      <div style={{ 
+        padding: '40px', 
+        marginTop: '30px',
+        background: '#f0f9ff', 
+        borderRadius: '10px',
+        textAlign: 'center'
+      }}>
+        <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '15px' }}>
+          Ready to Preserve Your Legacy?
+        </h2>
+        <p style={{ fontSize: '1.125rem', marginBottom: '25px', maxWidth: '800px', margin: '0 auto 25px' }}>
+          Join thousands of others who are using LifeLegacy to document their life stories and secure their digital legacy.
+        </p>
+        <button 
+          onClick={() => router.push('/auth/register')}
+          style={{ 
+            background: '#0284c7', 
+            color: 'white',
+            padding: '12px 30px',
+            border: 'none',
+            borderRadius: '6px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          Start For Free
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage;

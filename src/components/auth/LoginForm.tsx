@@ -3,9 +3,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
-import { Form, Button, Alert, Spinner } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -42,66 +39,164 @@ export default function LoginForm() {
   return (
     <div>
       {error && (
-        <Alert variant="danger" className="mb-4">
-          {error}
-        </Alert>
+        <div style={{ 
+          marginBottom: '1.5rem', 
+          borderRadius: '0.375rem', 
+          backgroundColor: '#fee2e2', 
+          border: '1px solid #fecaca', 
+          padding: '1rem' 
+        }}>
+          <p style={{ fontSize: '0.875rem', color: '#b91c1c', fontWeight: '500' }}>{error}</p>
+        </div>
       )}
 
-      <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>
-            <FontAwesomeIcon icon={faEnvelope} className="me-2 text-primary" />
+      <form onSubmit={handleLogin}>
+        <div style={{ marginBottom: '1rem' }}>
+          <label
+            htmlFor="email"
+            style={{ 
+              display: 'block', 
+              fontSize: '0.875rem', 
+              fontWeight: '500', 
+              color: '#334155', 
+              marginBottom: '0.25rem' 
+            }}
+          >
             Email address
-          </Form.Label>
-          <Form.Control
+          </label>
+          <input
+            id="email"
+            name="email"
             type="email"
-            placeholder="you@example.com"
+            autoComplete="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '2.5rem',
+              padding: '0.5rem 0.75rem',
+              fontSize: '0.875rem',
+              lineHeight: '1.5',
+              color: '#1e293b',
+              backgroundColor: '#fff',
+              backgroundClip: 'padding-box',
+              border: '1px solid #cbd5e1',
+              borderRadius: '0.375rem',
+              transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out'
+            }}
+            placeholder="you@example.com"
           />
-        </Form.Group>
+        </div>
 
-        <Form.Group className="mb-4" controlId="password">
-          <Form.Label>
-            <FontAwesomeIcon icon={faLock} className="me-2 text-primary" />
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label
+            htmlFor="password"
+            style={{ 
+              display: 'block', 
+              fontSize: '0.875rem', 
+              fontWeight: '500', 
+              color: '#334155', 
+              marginBottom: '0.25rem' 
+            }}
+          >
             Password
-          </Form.Label>
-          <Form.Control
+          </label>
+          <input
+            id="password"
+            name="password"
             type="password"
-            placeholder="••••••••"
+            autoComplete="current-password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '2.5rem',
+              padding: '0.5rem 0.75rem',
+              fontSize: '0.875rem',
+              lineHeight: '1.5',
+              color: '#1e293b',
+              backgroundColor: '#fff',
+              backgroundClip: 'padding-box',
+              border: '1px solid #cbd5e1',
+              borderRadius: '0.375rem',
+              transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out'
+            }}
+            placeholder="••••••••"
           />
-        </Form.Group>
+        </div>
 
-        <Button
-          variant="primary"
+        <button
           type="submit"
-          className="w-100"
           disabled={loading}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            backgroundColor: '#0284c7',
+            color: 'white',
+            fontWeight: '500',
+            fontSize: '0.875rem',
+            lineHeight: '1.25rem',
+            padding: '0.625rem 1.25rem',
+            borderRadius: '0.375rem',
+            border: 'none',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.7 : 1,
+            transition: 'background-color 0.2s'
+          }}
         >
           {loading ? (
             <>
-              <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-                className="me-2"
-              />
+              <svg 
+                style={{ 
+                  animation: 'spin 1s linear infinite',
+                  marginRight: '0.5rem',
+                  height: '1rem',
+                  width: '1rem' 
+                }} 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24"
+              >
+                <circle 
+                  style={{ opacity: 0.25 }} 
+                  cx="12" 
+                  cy="12" 
+                  r="10" 
+                  stroke="currentColor" 
+                  strokeWidth="4"
+                ></circle>
+                <path 
+                  style={{ opacity: 0.75 }} 
+                  fill="currentColor" 
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
               Signing in...
             </>
           ) : (
             <>
-              <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
               Sign in
             </>
           )}
-        </Button>
-      </Form>
+        </button>
+
+        <style jsx>{`
+          @keyframes spin {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        `}</style>
+      </form>
     </div>
   );
 } 
